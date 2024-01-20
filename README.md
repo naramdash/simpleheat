@@ -2,10 +2,10 @@
 
 `simpleheat.ts` is a library based on `simpleheat`, written in Typescript with the modern syntax of JavaScript, with some minor changes.
 
-`simpleheat` is a super-tiny JavaScript library for drawing heatmaps with Canvas.
+[`simpleheat`](https://github.com/mourner/simpleheat) is a super-tiny JavaScript library for drawing heatmaps with Canvas.
 Inspired by [heatmap.js](https://github.com/pa7/heatmap.js), but with focus on simplicity and performance.
 
-Demo: http://naramdash.github.io/simpleheat/demo
+View [Demo](http://naramdash.github.io/simpleheat)
 
 ```ts
 const heat = new SimpleHeat(canvas, width, height);
