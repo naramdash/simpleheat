@@ -93,6 +93,12 @@ class SimpleHeat {
 
     return this;
   }
+
+  resize(width?: number, height?: number): this {
+    if (width) this.canvas.width = width;
+    if (height) this.canvas.height = height;
+    return this;
+  }
   //#endregion
 
   #animationFrameId: number | null = null;
