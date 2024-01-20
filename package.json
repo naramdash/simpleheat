@@ -1,12 +1,22 @@
 {
-  "name": "test-simpleheat-new",
-  "private": true,
-  "version": "0.0.0",
+  "name": "simpleheat.ts",
+  "version": "0.1.0",
   "type": "module",
+  "files": [
+    "out"
+  ],
+  "module": "./out/index.js",
+  "types": "./out/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./out/index.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc",
+    "vite-build": "tsc --noEmit && vite build",
+    "vite-preview": "vite preview"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
