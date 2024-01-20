@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SimpleHeat.ts demo</title>
+    <style>
+      body {
+        text-align: center;
+        font: 16px/1.4 "Helvetica Neue", Arial, sans-serif;
+      }
+      a {
+        color: #0077ff;
+      }
+      .container {
+        width: 1000px;
+        height: 600px;
+        margin: 0 auto;
+        position: relative;
+        border: 1px solid #ccc;
+      }
+      .options {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.6);
+        border-bottom: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        line-height: 1;
+      }
+      .options input {
+        width: 200px;
+      }
+      .options label {
+        width: 60px;
+        float: left;
+        text-align: right;
+        margin-right: 10px;
+        color: #555;
+      }
+      .ghbtns {
+        position: relative;
+        top: 4px;
+        margin-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <h2>original source</h2>
+      <strong><code>simpleheat</code></strong> is a tiny and fast JS heatmap library. More on
+      <a href="https://github.com/mourner/simpleheat">mourner / simpleheat</a>
+    </p>
+    <p>
+      <h1>opinioned typescript conversion</h1>
+      <strong>SimpleHeat.ts</strong> is opinioned typescript converted based on <code>simpleheat</code>. More on
+      <a href="https://github.com/naramdash/simpleheat">naramdash / simpleheat</a>
+    </p>
+    <div class="container">
+      <div class="options">
+        <label>Radius </label><input type="range" id="radius" value="25" min="10" max="50" />
+        <br />
+        <label>Blur </label><input type="range" id="blur" value="15" min="10" max="50" />
+      </div>
+      <canvas id="canvas" width="1000" height="600"></canvas>
+    </div>
+  </body>
+  <script type="module">
+    import { SimpleHeat } from "/src/SimpleHeat.ts";
+
+    const canvas = document.getElementById("canvas");
+    const radius = document.getElementById("radius");
+    const blur = document.getElementById("blur");
+    const heat = new SimpleHeat(canvas, 1000, 600);
+
+    const onConfChanged = () => {
+      heat.radius(+radius.value, +blur.value).draw();
+    };
+    radius.addEventListener("change", onConfChanged);
+    blur.addEventListener("change", onConfChanged);
+    canvas.addEventListener("mousemove", (e) => {
+      heat.add([e.offsetX, e.offsetY, 1]).draw();
+    });
+
+    fetch("data.json", { method: "GET" })
+      .then((res) => res.json())
+      .then((data) => heat.data(data).max(18).draw());
+  </script>
+</html>
